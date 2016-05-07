@@ -1,0 +1,21 @@
+{
+  "name": "control",
+  "version": "1.0.0",
+  "description": "Minimal async flow control functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test-runner.js | faucet",
+    "dev-test": "node test/test-runner.js"
+  },
+  "keywords": [
+    "async",
+    "flow-control",
+    "control"
+  ],
+  "author": "Mark McKelvy",
+  "license": "MIT",
+  "devDependencies": {
+    "faucet": "0.0.1",
+    "tape": "^4.5.1"
+  }
+}
