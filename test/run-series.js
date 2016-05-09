@@ -45,9 +45,17 @@ function testRunSeries() {
     ], final);
   });
 
-  test('runSeries() -- should return early if function returns an error', function(t) {
+  test('runSeries() -- should invoke "done" early if any function returns an error', function(t) {
     // Simulated async function to run
     function asyncFn(param, callback) {
+      console.log(`Doing async stuff with ${param}`);
+
+      setTimeout(function() {
+        callback(null, param * 2);
+      }, 1000);
+    }
+
+    function asyncErr(param, callback) {
       console.log(`Doing async stuff with ${param}`);
 
       setTimeout(function() {
@@ -58,7 +66,7 @@ function testRunSeries() {
     // Function to pass for done
     function final(err, results) {
       if (err) {
-        t.equal(err, 'Error', 'Should properly capture the error');
+        t.equal(err, 'Error', 'should properly capture the error');
         t.end();
 
       } else {
@@ -69,7 +77,7 @@ function testRunSeries() {
 
     control.runSeries([
       function(callback) {
-        asyncFn(2, callback);
+        asyncErr(2, callback);
       },
       function(callback) {
         asyncFn(3, callback);
