@@ -106,7 +106,7 @@ Same API as `runSeries` except interim results are not available in `runParallel
 control.runParallel([
   ...
   function(callback, results) {
-    console.log(results); // undefined
+    console.log(results); // NO! Will be undefined.
   }
   ...
 ], function(err, results) {
