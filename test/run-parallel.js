@@ -5,11 +5,8 @@ const control = require('../index');
 
 function testRunParallel() {
   test('runParallel() -- should run each function passed in with correct results', function(t) {
-
-    // For measurement of duration.
     const start = Date.now();
 
-    // Simulated async function to run
     function asyncFn(param, callback) {
       console.log(`Doing async stuff with ${param}`);
 
@@ -18,15 +15,12 @@ function testRunParallel() {
       }, 1000);
     }
 
-    // Function to pass for done
     function final(err, results) {
       if (err) {
         t.fail('Returned an error when should have returned results');
         t.end();
 
       } else {
-
-        // Measure elapsed time.
         const end = Date.now();
         console.log(`Time elapsed: ${end - start}`);
 
@@ -55,8 +49,6 @@ function testRunParallel() {
   });
 
   test('runParallel() -- should invoke "done" with error if any function returns an error', function(t) {
-
-    // Simulated async function to run
     function asyncFn(param, callback) {
       console.log(`Doing async stuff with ${param}`);
 
@@ -65,7 +57,6 @@ function testRunParallel() {
       }, 1000);
     }
 
-    // Simulated async function to run
     function asyncErr(param, callback) {
       console.log(`Doing async stuff with ${param}`);
 
@@ -74,7 +65,6 @@ function testRunParallel() {
       }, 1000);
     }
 
-    // Function to pass for done
     function final(err, results) {
       if (err) {
         t.equal(err, 'Error', 'Should properly capture the error');
