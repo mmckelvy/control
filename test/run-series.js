@@ -6,6 +6,9 @@ const control = require('../index');
 function testRunSeries() {
   test('runSeries() -- should run each function passed in with correct results', function(t) {
 
+    // For measurement of duration.
+    const start = Date.now();
+
     // Simulated async function to run
     function asyncFn(param, callback) {
       console.log(`Doing async stuff with ${param}`);
@@ -22,7 +25,13 @@ function testRunSeries() {
         t.end();
 
       } else {
+
+        // Measure elapsed time.
+        const end = Date.now();
+        console.log(`Time elapsed: ${end - start}`);
+
         console.log(`HERE ARE THE RESULTS: ${results.join(', ')}`);
+
         t.deepEqual(
           results,
           [4, 6, 8],
@@ -70,7 +79,7 @@ function testRunSeries() {
         t.end();
 
       } else {
-        t.fail('should not continue running functions');
+        t.fail('Should not continue running functions');
         t.end();
       }
     }
