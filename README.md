@@ -5,15 +5,21 @@ Minimal async flow control functions
 `npm install control`
 
 # Examples
+#### Set up
 ```
-// Some async function...
+const control = require('control');
+
+// Some async function you have defined...
 function asyncFn(param, cb) {
   setTimeout(function() {
     cb(null, param * 2);
   }, 1000);
 }
+```
 
-// ...using control.runSeries:
+#### Vanilla `control.runSeries`:
+
+```
 control.runSeries([
   function(callback) {
     asyncFn(2, callback);
@@ -29,8 +35,11 @@ control.runSeries([
 
   else console.log(results); // --> [4, 6, 8]
 });
+```
 
-// Optionally access results along the way to create a "waterfall" approach:
+#### A "waterfall" approach using `control.runSeries`:
+
+```
 control.runSeries([
   function(callback) {
     asyncFn(2, callback);
@@ -48,8 +57,11 @@ control.runSeries([
 
   else console.log(results); // --> [4, 8, 16]
 });
+```
 
-// runParallel syntax is exactly the same as runSeries (though results are not exposed along the way):
+#### control.runParallel:
+
+```
 control.runParallel([
   function(callback) {
     asyncFn(2, callback);
@@ -68,7 +80,7 @@ control.runParallel([
 ```
 
 # Methodology
-These are the bare essentials for async control flow: run an array of async functions in series or run them in parallel.  Running functions in series allows you to access results along the way (waterfall) and exit early if something goes wrong. Running in parallel gives you a speed boost but does not allow for interim access to results or an early exit on error.
+These are the bare essentials for async control flow: run an array of async functions in series or run them in parallel.  Running functions in series allows you to access results along the way (waterfall) and exit early if something goes wrong. Running in parallel gives you a speed boost but does not allow for interim access to results or an early exit on error. It can also be resource intensive if you launch a large number of tasks.
 
 Most async tasks can be adequately managed with either of these two approaches.
 
@@ -88,7 +100,7 @@ Most async tasks can be adequately managed with either of these two approaches.
 `{Function}` A final callback function to invoke once all scheduled functions have completed. Will be invoked immediately with an error and no subsequent functions will be run if any scheduled function errors out, otherwise will be invoked with the final `results` array (see examples above).
 
 ### `runParallel(fns, done)`
-Same api as `runSeries` except interim results are not available in `runParallel`. Results are only available in the final `done` callback.
+Same API as `runSeries` except interim results are not available in `runParallel`. Results are only available in the final `done` callback.
 
 ```
 control.runParallel([
