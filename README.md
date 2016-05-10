@@ -1,4 +1,4 @@
-# control
+# simple-control
 Minimal async flow control functions
 
 # Installation
