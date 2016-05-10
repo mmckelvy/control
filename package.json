@@ -1,8 +1,12 @@
 {
-  "name": "control",
+  "name": "simple-control",
   "version": "1.0.0",
   "description": "Minimal async flow control functions",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mmckelvy/simple-control.git"
+  },
   "scripts": {
     "test": "node test/test-runner.js | faucet",
     "dev-test": "node test/test-runner.js"

@@ -2,12 +2,12 @@
 Minimal async flow control functions
 
 # Installation
-`npm install control`
+`npm install simple-control`
 
 # Examples
 #### Set up
 ```
-const control = require('control');
+const control = require('simple-control');
 
 // Some async function you have defined...
 function asyncFn(param, cb) {
@@ -17,7 +17,7 @@ function asyncFn(param, cb) {
 }
 ```
 
-#### Vanilla `control.runSeries`:
+#### Vanilla `runSeries`:
 
 ```
 control.runSeries([
@@ -37,7 +37,7 @@ control.runSeries([
 });
 ```
 
-#### A "waterfall" approach using `control.runSeries`:
+#### A "waterfall" approach using `runSeries`:
 
 ```
 control.runSeries([
@@ -59,7 +59,7 @@ control.runSeries([
 });
 ```
 
-#### control.runParallel:
+#### runParallel:
 
 ```
 control.runParallel([
